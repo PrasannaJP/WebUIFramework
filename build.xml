@@ -1,0 +1,25 @@
+<project name="WebUIFramework" basedir="." default="">
+	<property name="repo" value="http://central.maven.org/maven2"/>
+	<property name="jars" value="lib"/>
+	<property name="selenium-java.version" value="2.45.0"/>
+	
+	<target name = "init">
+		 <mkdir dir="${jars}"/>
+	<get src="${repo}/org/seleniumhq/selenium/selenium-java/${selenium-java.version}/selenium-java-${selenium-java.version}.jar"
+			    		             dest="${jars}/selenium-java-${selenium-java.version}.jar"/>
+	</target>
+	<target name="classpath" depends = "init">
+		        <path id="classpath">
+		            <fileset dir="${jars}">
+		                <include name="**/*.jar"/>
+		            </fileset>
+		        	<pathelement location="target/classes"/>
+		        </path>
+		    </target>
+
+		    <target name="compile" depends="classpath">
+		        <mkdir dir="target/classes"/>
+		        <javac srcdir="src/main/java" destdir="target/classes" includeantruntime="false"/>
+		    </target>
+	
+	</project>
